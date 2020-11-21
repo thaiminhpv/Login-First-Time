@@ -10,8 +10,17 @@
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>lms.funix.lab.controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginFirstTimeServlet</servlet-name>
+        <servlet-class>lms.funix.lab.controller.LoginFirstTimeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginFirstTimeServlet</servlet-name>
+        <url-pattern>/first_time_login</url-pattern>
+    </servlet-mapping>
+
 </web-app>

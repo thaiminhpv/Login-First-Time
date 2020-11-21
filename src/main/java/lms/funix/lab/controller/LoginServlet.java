@@ -1,6 +1,6 @@
 package lms.funix.lab.controller;
 
-import lms.funix.lab.bo.Login;
+import lms.funix.lab.bo.LoginBO;
 import lms.funix.lab.entities.User;
 
 import javax.servlet.ServletException;
@@ -16,16 +16,15 @@ public class LoginServlet extends HttpServlet {
         final String user_id = request.getParameter("user_id");
         final String password = request.getParameter("password");
         User user = new User(user_id, password);
-        final Login login = new Login();
+        final LoginBO loginBO = new LoginBO();
 
-//        if (login.validate(user)) { //check syntax
-//            if (login.login(user)) { //check if exists in database
+//        if (loginBO.validate(user)) { //check syntax
+//            if (loginBO.login(user)) { //check if exists in database
 //                if (user.isFirstLogin()) {
-//
 //                }
 //            }
 //        }
-//
+
         response.getWriter().println(user);
     }
 

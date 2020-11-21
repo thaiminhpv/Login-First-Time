@@ -5,7 +5,7 @@ import lms.funix.lab.entities.User;
 
 import java.util.regex.Pattern;
 
-public class Login {
+public class LoginBO {
     private static final String USERID_REGEX_MATCHER = "^\\d{1,16}$";
     private static final int PASSWORD_MAX_LENGTH = 8;
 

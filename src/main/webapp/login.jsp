@@ -11,6 +11,7 @@
     <title>Login</title>
 </head>
 <body>
+<%@include file="components/header.jsp" %>
 <form action="${pageContext.request.contextPath}/" method="post">
     <label>
         User ID:
@@ -26,6 +27,6 @@
     <br>
     <input type="submit">
 </form>
-
+<%@include file="components/footer.jsp" %>
 </body>
 </html>

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LoginTest {
+class LoginBOTest {
 
     @BeforeEach
     void setUp() {
@@ -30,9 +30,9 @@ class LoginTest {
                 {"1234", "", false, "password is empty"}
         };
 
-        final Login login = new Login();
+        final LoginBO loginBO = new LoginBO();
         for (Object[] testUser : testUsers) {
-            assertEquals((boolean) testUser[2], login.validate(new User((String) testUser[0], (String) testUser[1])), (String) testUser[3]);
+            assertEquals((boolean) testUser[2], loginBO.validate(new User((String) testUser[0], (String) testUser[1])), (String) testUser[3]);
         }
     }
 

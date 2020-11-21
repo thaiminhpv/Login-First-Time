@@ -1,17 +1,19 @@
 package lms.funix.lab.entities;
 
+import java.util.Map;
+
 public class User {
     private String userID;
     private String password;
     private boolean firstLogin = true;
-    private String [] hintAnswers;
+    private Map<String, String> hintAnswers;
 
     public User(String userID, String password) {
         this.userID = userID;
         this.password = password;
     }
 
-    public User(String userID, String password, String[] hintAnswers) {
+    public User(String userID, String password, Map<String, String> hintAnswers) {
         this.userID = userID;
         this.password = password;
         this.hintAnswers = hintAnswers;
@@ -24,6 +26,14 @@ public class User {
                 ", password='" + password + '\'' +
                 ", firstLogin=" + firstLogin +
                 '}';
+    }
+
+    public Map<String, String> getHintAnswers() {
+        return hintAnswers;
+    }
+
+    public void setHintAnswers(Map<String, String> hintAnswers) {
+        this.hintAnswers = hintAnswers;
     }
 
     public boolean isFirstLogin() {
@@ -48,13 +58,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String[] getHintAnswers() {
-        return hintAnswers;
-    }
-
-    public void setHintAnswers(String[] hintAnswers) {
-        this.hintAnswers = hintAnswers;
     }
 }
