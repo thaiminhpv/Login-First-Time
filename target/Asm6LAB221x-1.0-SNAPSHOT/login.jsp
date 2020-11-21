@@ -11,11 +11,12 @@
     <title>Login</title>
 </head>
 <body>
+<%@include file="components/header.jsp" %>
 <form action="${pageContext.request.contextPath}/" method="post">
     <label>
-        Username:
+        User ID:
         <br>
-        <input type="text" name="username">
+        <input type="text" name="user_id">
     </label>
     <br>
     <label>
@@ -23,9 +24,9 @@
         <br>
         <input type="password" name="password">
     </label>
-    <br>
-    <input type="submit">
+    <br><input type="submit"><br>
+    <a href="first_time_login">Forgot password</a>
 </form>
-
+<%@include file="components/footer.jsp" %>
 </body>
 </html>

@@ -16,7 +16,7 @@
 <%@include file="components/header.jsp" %>
 <form action="${pageContext.request.contextPath}/first_time_login" method="post">
     <% for (int i = 0; i < 3; i++) {%>
-        <label>hint1<br><input type="text" class="answers"></label><br>
+        <label>hint1<br><input type="text" name="answers"></label><br>
     <% } %>
 
     <label>Old password:<br><input type="password" name="<%= LoginFirstTimeServlet.PARAMS_OLD_PASSWORD%>"></label><br>
@@ -25,15 +25,8 @@
     <input type="submit">
 </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    //TODO: host jquery locally
-    let answers = JSON.stringify([...$('input.answers').val()].map(e => e.innerText));
-
-    let input = $('<input>')
-                .attr('type', 'hidden')
-                .attr('name', 'answers').val(answers);
-    $('form').append($(input)).submit();
+    //TODO: submit hints as array
 </script>
 <%@include file="components/footer.jsp" %>
 

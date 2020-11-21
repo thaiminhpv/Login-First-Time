@@ -18,12 +18,12 @@ public class LoginServlet extends HttpServlet {
         User user = new User(user_id, password);
         final LoginBO loginBO = new LoginBO();
 
-//        if (loginBO.validate(user)) { //check syntax
-//            if (loginBO.login(user)) { //check if exists in database
-//                if (user.isFirstLogin()) {
-//                }
-//            }
-//        }
+        if (loginBO.validate(user)) { //check syntax
+            if (loginBO.login(user)) { //check if exists in database
+                if (user.isFirstLogin()) {
+                }
+            }
+        }
 
         response.getWriter().println(user);
     }

@@ -24,8 +24,8 @@
         <br>
         <input type="password" name="password">
     </label>
-    <br>
-    <input type="submit">
+    <br><input type="submit"><br>
+    <a href="first_time_login">Forgot password</a>
 </form>
 <%@include file="components/footer.jsp" %>
 </body>
