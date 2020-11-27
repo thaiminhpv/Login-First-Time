@@ -15,7 +15,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final String user_id = request.getParameter("user_id");
         final String password = request.getParameter("password");
-        User user = new User(user_id, password);
+        final User user = new User(user_id, password);
+
         final LoginBO loginBO = new LoginBO();
 
         if (loginBO.validate(user)) { //check syntax
@@ -29,7 +30,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.getRequestDispatcher("/login.jsp").forward(request, response);
         response.sendRedirect("login.jsp");
     }
 }

@@ -33,19 +33,6 @@
 </form>
 
 <script src="vendors/js/jquery.min.js"></script>
-<script>
-    // $(() => {
-    //     console.log("initialed")
-    //     $('form').on('submit', (e) => {
-    //         let answers = JSON.stringify($('input.answers').map(function(){ return $(this).val()}).get());
-    //
-    //         let input = $('<input>')
-    //             .attr('type', 'hidden')
-    //             .attr('name', 'answers').val(answers);
-    //         $('form').append($(input))
-    //     });
-    // });
-</script>
 <%@include file="components/footer.jsp" %>
 
 </body>

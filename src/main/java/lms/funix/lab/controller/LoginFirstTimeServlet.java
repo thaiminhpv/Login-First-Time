@@ -1,5 +1,7 @@
 package lms.funix.lab.controller;
 
+import lms.funix.lab.bo.LoginBO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,11 +30,15 @@ public class LoginFirstTimeServlet extends HttpServlet {
         final String[] questions = Arrays.stream(parameterMap.get(PARAMS_QUESTIONS)).map(e -> LIST_HINT_QUESTIONS[Integer.parseInt(e)]).toArray(String[]::new);
         final String[] answers = parameterMap.get(PARAMS_ANSWERS);
 
+//        new LoginBO().checkPassword(oldPassword, newPassword, confirmPassword);
+
+//        request.setAttribute("errorMessage", errorMessage);
+//        request.getRequestDispatcher("first_time_login.jsp").forward(request, response);
+
         response.getWriter().println("Done!");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.getRequestDispatcher("/first_time_login.jsp").forward(request, response);
         response.sendRedirect("first_time_login.jsp");
     }
 }
