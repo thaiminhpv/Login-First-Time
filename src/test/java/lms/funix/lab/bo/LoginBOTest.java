@@ -32,7 +32,7 @@ class LoginBOTest {
 
         final LoginBO loginBO = new LoginBO();
         for (Object[] testUser : testUsers) {
-            assertEquals((boolean) testUser[2], loginBO.validate(new User((String) testUser[0], (String) testUser[1])), (String) testUser[3]);
+            assertEquals(testUser[2], loginBO.validate(new User((String) testUser[0], (String) testUser[1])), (String) testUser[3]);
         }
     }
 

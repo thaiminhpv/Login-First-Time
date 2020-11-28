@@ -1,6 +1,7 @@
 package lms.funix.lab.controller;
 
 import lms.funix.lab.bo.LoginBO;
+import lms.funix.lab.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,16 +12,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
+import static lms.funix.lab.view.View.LIST_HINT_QUESTIONS;
+import static lms.funix.lab.view.View.LoginFirstTime.Params.*;
+import static lms.funix.lab.view.View.Path.FIRST_TIME_LOGIN_JSP;
+import static lms.funix.lab.view.View.USER_SESSION_NAME;
+
 @WebServlet(name = "LoginFirstTimeServlet")
 public class LoginFirstTimeServlet extends HttpServlet {
-    public static final String[] LIST_HINT_QUESTIONS = {"Bạn là người nước gì?", "Thú nuôi đầu tiên của bạn là gì?", "Lần đầu tiên bạn 5 điểm Hoá là khi nào?"};
-
-    public static final String PARAMS_ANSWERS = "answers";
-    public static final String PARAMS_QUESTIONS = "questions";
-    public static final String PARAMS_OLD_PASSWORD = "old_password";
-    public static final String PARAMS_NEW_PASSWORD = "new_password";
-    public static final String PARAMS_CONFIRM_NEW_PASSWORD = "confirm_new_password";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final Map<String, String[]> parameterMap = request.getParameterMap();
 
@@ -30,15 +28,20 @@ public class LoginFirstTimeServlet extends HttpServlet {
         final String[] questions = Arrays.stream(parameterMap.get(PARAMS_QUESTIONS)).map(e -> LIST_HINT_QUESTIONS[Integer.parseInt(e)]).toArray(String[]::new);
         final String[] answers = parameterMap.get(PARAMS_ANSWERS);
 
-//        new LoginBO().checkPassword(oldPassword, newPassword, confirmPassword);
+        final User currentUser = (User) request.getSession().getAttribute(USER_SESSION_NAME);
 
-//        request.setAttribute("errorMessage", errorMessage);
-//        request.getRequestDispatcher("first_time_login.jsp").forward(request, response);
+        if (currentUser == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
-        response.getWriter().println("Done!");
+        final String errorMessage = new LoginBO().checkPassword(currentUser, oldPassword, newPassword, confirmPassword);
+
+        request.setAttribute(ERROR_MESSAGE, errorMessage);
+        request.getRequestDispatcher(FIRST_TIME_LOGIN_JSP).forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("first_time_login.jsp");
+        response.sendRedirect(FIRST_TIME_LOGIN_JSP);
     }
 }

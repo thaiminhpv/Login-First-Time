@@ -2,14 +2,14 @@ package lms.funix.lab.dao;
 
 import lms.funix.lab.entities.User;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import static lms.funix.lab.view.View.Path.DAO.*;
 
 public class UserDAO {
-    private static final String RESOURCE_LOCATION = "src/main/resources/";
-    private static final String FILE_PATH = "users.txt";
-    public static final String SEPARATOR = "_";
-
-
     public static synchronized void addUser(User user) {
 
     }

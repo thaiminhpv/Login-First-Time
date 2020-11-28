@@ -2,9 +2,15 @@ package lms.funix.lab.bo;
 
 import lms.funix.lab.dao.UserDAO;
 import lms.funix.lab.entities.User;
+import lms.funix.lab.view.View;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
+
+import static lms.funix.lab.view.View.LoginFirstTime.MSG1;
+import static lms.funix.lab.view.View.LoginFirstTime.MSG2;
+
 
 public class LoginBO {
     private static final String USERID_REGEX_MATCHER = "^\\d{1,16}$";
@@ -12,6 +18,7 @@ public class LoginBO {
 
     /**
      * Check syntax only
+     *
      * @param user
      * @return True if passed
      */
@@ -20,8 +27,21 @@ public class LoginBO {
                 && !user.getPassword().isEmpty() && user.getPassword().length() <= PASSWORD_MAX_LENGTH;
     }
 
-    public String checkPassword(String oldPassword, String newPassword, String confirmPassword) {
-
+    /**
+     * @param user
+     * @param oldPassword
+     * @param newPassword
+     * @param confirmPassword
+     * @return error message
+     */
+    public String checkPassword(User user, String oldPassword, String newPassword, String confirmPassword) {
+        if (!Objects.equals(newPassword, confirmPassword)) {
+            return MSG1;
+        } else if (!Objects.equals(user.getPassword(), oldPassword)) {
+            return MSG2;
+        } else {
+            return null;
+        }
     }
 
     public void addHints(Map<String, String> hints) {

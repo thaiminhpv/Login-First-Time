@@ -1,5 +1,5 @@
-<%@ page import="lms.funix.lab.controller.LoginFirstTimeServlet" %>
-<%@ page import="static lms.funix.lab.controller.LoginFirstTimeServlet.*" %><%--
+<%@ page import="static lms.funix.lab.view.View.LIST_HINT_QUESTIONS" %>
+<%@ page import="static lms.funix.lab.view.View.LoginFirstTime.Params.*" %><%--
   Created by IntelliJ IDEA.
   User: Thaiminhpv PC
   Date: 21-Nov-20
@@ -14,6 +14,7 @@
 <body>
 
 <%@include file="components/header.jsp" %>
+<h1>Error: <%=request.getAttribute(ERROR_MESSAGE) == null ? "Nothing" : request.getAttribute(ERROR_MESSAGE)%></h1>
 <form action="${pageContext.request.contextPath}/first_time_login" method="post">
     <% for (int i = 0; i < 3; i++) {%>
         <label>
