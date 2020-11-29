@@ -5,8 +5,9 @@ public class View {
 
     public static final String USER_SESSION_NAME = "user";
 
-    public class Login {
-        public static final String MSG1 = "userID and password doesn't match!";
+    public static class Login {
+        public static final String MSG1 = "userID and password is invalid! Name must have only numbers and not have longer than 16 characters.";
+        public static final String MSG2 = "Invalid User ID/Password. Number of attempts left <n-1>";
 
         public class Params {
             public static final String USER_ID = "user_id";
@@ -29,15 +30,24 @@ public class View {
         }
     }
 
-    public class Path {
+    public static class Path {
         public static final String LOGIN_JSP = "login.jsp";
         public static final String FIRST_TIME_LOGIN_JSP = "first_time_login.jsp";
         public static final String PORTAL_FACILITIES_JSP = "portal_facilities.jsp";
 
-        public class DAO {
-            public static final String RESOURCE_LOCATION = "src/main/resources/";
+        public static final String FIRST_TIME_LOGIN_SERVLET = "first_time_login";
+        public static final String LOGIN_SERVLET = "/";
+
+        public static class DAO {
+            public static final String DATABASE_LOCATION = "database\\";
             public static final String FILE_PATH = "users.txt";
             public static final String SEPARATOR = "_";
+            public static String RESOURCE_PATH;
+
+            public static void setResourcePath(String resourcePath) {
+                System.out.println("Resource Path has been set!: " + resourcePath);
+                RESOURCE_PATH = resourcePath;
+            }
         }
     }
 

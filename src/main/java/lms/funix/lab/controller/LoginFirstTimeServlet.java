@@ -15,6 +15,7 @@ import java.util.Map;
 import static lms.funix.lab.view.View.LIST_HINT_QUESTIONS;
 import static lms.funix.lab.view.View.LoginFirstTime.Params.*;
 import static lms.funix.lab.view.View.Path.FIRST_TIME_LOGIN_JSP;
+import static lms.funix.lab.view.View.Path.FIRST_TIME_LOGIN_SERVLET;
 import static lms.funix.lab.view.View.USER_SESSION_NAME;
 
 @WebServlet(name = "LoginFirstTimeServlet")
@@ -38,7 +39,7 @@ public class LoginFirstTimeServlet extends HttpServlet {
         final String errorMessage = new LoginBO().checkPassword(currentUser, oldPassword, newPassword, confirmPassword);
 
         request.setAttribute(ERROR_MESSAGE, errorMessage);
-        request.getRequestDispatcher(FIRST_TIME_LOGIN_JSP).forward(request, response);
+        request.getRequestDispatcher(FIRST_TIME_LOGIN_SERVLET).forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

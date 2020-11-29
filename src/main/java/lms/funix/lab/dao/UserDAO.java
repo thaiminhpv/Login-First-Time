@@ -1,6 +1,7 @@
 package lms.funix.lab.dao;
 
 import lms.funix.lab.entities.User;
+import lms.funix.lab.view.View;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +16,7 @@ public class UserDAO {
     }
 
     public static boolean validate(User user) {
-        final File file = new File(RESOURCE_LOCATION + FILE_PATH);
+        final File file = new File(RESOURCE_PATH + DATABASE_LOCATION + FILE_PATH);
         System.out.println(file.getAbsolutePath());
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
