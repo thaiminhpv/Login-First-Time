@@ -25,8 +25,6 @@ public class LoginServlet extends HttpServlet {
         final User user = new User(user_id, password);
 
         final LoginBO loginBO = new LoginBO();
-        //TODO: count number of failure attempts and lock account
-        //TODO: split case correct UserID and Wrong Password to invalid syntax
 
         try {
             loginBO.validate(user); //check syntax

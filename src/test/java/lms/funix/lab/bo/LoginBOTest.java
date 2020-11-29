@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static lms.funix.lab.view.View.LoginFirstTime.MSG1;
-import static lms.funix.lab.view.View.LoginFirstTime.MSG2;
+import static lms.funix.lab.view.View.Login.MSG1;
+import static lms.funix.lab.view.View.Login.MSG2;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -41,16 +41,17 @@ class LoginBOTest {
                 {"1234", "", false, "password is empty"}
         };
 
+        List<Executable> tests = new ArrayList<>();
         final LoginBO loginBO = new LoginBO();
         for (Object[] testUser : testUsers) {
             try {
                 loginBO.validate(new User((String) testUser[0], (String) testUser[1]));
                 throw new Exception("Validate correct!");
             } catch (Exception e) {
-                assertEquals(testUser[2], Objects.equals(e.getMessage(), MSG1), (String) testUser[3]);
+                tests.add(() -> assertEquals(testUser[2], !Objects.equals(e.getMessage(), MSG1), (String) testUser[3]));
             }
         }
-
+        assertAll(tests);
     }
 
 
@@ -63,14 +64,15 @@ class LoginBOTest {
                 {"6973", "mnpq", "abc69", "abc69", "mpnkasdf", MSG2, "old password must match"},
         };
 
+        List<Executable> tests = new ArrayList<>();
         final LoginBO loginBO = new LoginBO();
         for (Object[] testUser : testUsers) {
-            assertEquals(
+            tests.add(() -> assertEquals(
                     testUser[5],
                     loginBO.checkChangePassword(new User((String) testUser[0], (String) testUser[4]), (String) testUser[1], (String) testUser[2], (String) testUser[3]),
-                    (String) testUser[6]
-            );
+                    (String) testUser[6]));
         }
+        assertAll(tests);
     }
 
     @Test

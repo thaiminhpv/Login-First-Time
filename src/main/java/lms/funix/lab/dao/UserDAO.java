@@ -7,19 +7,20 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static lms.funix.lab.view.View.Login.*;
+import static lms.funix.lab.view.View.Login.Config.MAX_ATTEMPTS;
 import static lms.funix.lab.view.View.Path.DAO.*;
 import static lms.funix.lab.view.View.Path.DAO.FILE_PATH.USER_FILE;
 
 public class UserDAO {
     /**
-     * query all user into arraylist, update new user, then print all back
+     * query all user into arraylist, delete the whole file, update new user, then print all back
      * @param updatingUser
      */
     public static synchronized void updateUser(User updatingUser) {
         final ArrayList<User> allUsers = getAllUsers();
         updateUserInList(allUsers, updatingUser);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(getFilePath(USER_FILE), true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(getFilePath(USER_FILE), false))) {
             allUsers.forEach(user -> writer.println(userToStringDAO(user)));
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,7 +75,7 @@ public class UserDAO {
                 final User currentUser = new User(attributes[0], attributes[1], Integer.parseInt(attributes[2]) == 1, Integer.parseInt(attributes[3]));
                 if (Objects.equals(user.getUserID(), currentUser.getUserID())) {
                     // if userID matches
-                    if (currentUser.getFailedAttempts() >= 3) {
+                    if (currentUser.getFailedAttempts() >= MAX_ATTEMPTS) {
                         throw new Exception(MSG3);
                     } else if (Objects.equals(user.getPassword(), currentUser.getPassword())) {
                         return true;

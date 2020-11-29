@@ -6,12 +6,15 @@ public class View {
     public static final String USER_SESSION_NAME = "user";
 
     public static class Login {
-        public static final int MAX_ATTEMPTS = 3;
-
         public static final String MSG1 = "userID and password is invalid! Name must have only numbers and not have longer than 16 characters.";
         public static final String MSG2 = "Invalid User ID/Password. Number of attempts left ";
         public static final String MSG3 = "Your ID has been locked due to too many failed attempts, you need to call the Call center to unlock the User ID";
 
+        public class Config {
+            public static final int MAX_ATTEMPTS = 3;
+            public static final String USERID_REGEX_MATCHER = "^\\d{1,16}$";
+            public static final int PASSWORD_MAX_LENGTH = 8;
+        }
 
         public class Params {
             public static final String USER_ID = "user_id";

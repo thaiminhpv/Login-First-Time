@@ -7,22 +7,22 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static lms.funix.lab.view.View.LoginFirstTime.MSG1;
-import static lms.funix.lab.view.View.LoginFirstTime.MSG2;
+import static lms.funix.lab.view.View.Login.Config.PASSWORD_MAX_LENGTH;
+import static lms.funix.lab.view.View.Login.Config.USERID_REGEX_MATCHER;
+import static lms.funix.lab.view.View.Login.MSG1;
+import static lms.funix.lab.view.View.Login.MSG2;
 
 
 public class LoginBO {
-    private static final String USERID_REGEX_MATCHER = "^\\d{1,16}$";
-    private static final int PASSWORD_MAX_LENGTH = 8;
-
     /**
      * @param user
      * @return nothing
      * @throws Exception (ErrorMessage)
      */
     public void validate(User user) throws Exception {
-        if (Pattern.matches(USERID_REGEX_MATCHER, user.getUserID())
-                && !user.getPassword().isEmpty() && user.getPassword().length() <= PASSWORD_MAX_LENGTH)
+        if (!Pattern.matches(USERID_REGEX_MATCHER, user.getUserID())
+                || user.getPassword().isEmpty()
+                || user.getPassword().length() > PASSWORD_MAX_LENGTH)
             throw new Exception(MSG1);
     }
 
