@@ -36,7 +36,7 @@ public class LoginFirstTimeServlet extends HttpServlet {
             return;
         }
 
-        final String errorMessage = new LoginBO().checkPassword(currentUser, oldPassword, newPassword, confirmPassword);
+        final String errorMessage = new LoginBO().checkChangePassword(currentUser, oldPassword, newPassword, confirmPassword);
 
         request.setAttribute(ERROR_MESSAGE, errorMessage);
         request.getRequestDispatcher(FIRST_TIME_LOGIN_SERVLET).forward(request, response);

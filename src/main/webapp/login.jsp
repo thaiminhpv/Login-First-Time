@@ -29,6 +29,7 @@
     </label>
     <br><input type="submit"><br>
     <a href="first_time_login">Forgot password</a>
+    <!-- TODO: change this later to forgot_password_jsp -->
 </form>
 <%@include file="components/footer.jsp" %>
 </body>

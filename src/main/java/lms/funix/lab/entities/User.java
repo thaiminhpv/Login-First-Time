@@ -7,6 +7,7 @@ public class User {
     private String userID;
     private String password;
     private boolean firstLogin = true;
+    private int failedAttempts = 0;
     private Map<String, String> hintAnswers;
 
     public User(String userID, String password) {
@@ -14,28 +15,33 @@ public class User {
         this.password = password;
     }
 
-    public User(String userID, String password, Map<String, String> hintAnswers) {
+    public User(String userID, String password, boolean firstLogin, int failedAttempts) {
         this.userID = userID;
         this.password = password;
-        this.hintAnswers = hintAnswers;
+        this.firstLogin = firstLogin;
+        this.failedAttempts = failedAttempts;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + userID + '\'' +
+                "userID='" + userID + '\'' +
                 ", password='" + password + '\'' +
                 ", firstLogin=" + firstLogin +
+                ", failedAttempts=" + failedAttempts +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userID.equals(user.userID) &&
-                password.equals(user.password);
+    public int getFailedAttempts() {
+        return failedAttempts;
+    }
+
+    public void setFailedAttempts(int failedAttempts) {
+        this.failedAttempts = failedAttempts;
+    }
+
+    public void increaseFailedAttempts() {
+        this.failedAttempts++;
     }
 
     @Override

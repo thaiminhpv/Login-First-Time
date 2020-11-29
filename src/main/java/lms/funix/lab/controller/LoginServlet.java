@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static lms.funix.lab.view.View.Login.MSG1;
-import static lms.funix.lab.view.View.Login.MSG2;
 import static lms.funix.lab.view.View.Login.Params.PASSWORD;
 import static lms.funix.lab.view.View.Login.Params.USER_ID;
 import static lms.funix.lab.view.View.LoginFirstTime.Params.ERROR_MESSAGE;
@@ -30,7 +28,8 @@ public class LoginServlet extends HttpServlet {
         //TODO: count number of failure attempts and lock account
         //TODO: split case correct UserID and Wrong Password to invalid syntax
 
-        if (loginBO.validate(user)) { //check syntax
+        try {
+            loginBO.validate(user); //check syntax
             if (loginBO.login(user)) { //check if exists in database
                 if (user.isFirstLogin()) {
                     request.getSession().setAttribute(USER_SESSION_NAME, user);
@@ -39,13 +38,9 @@ public class LoginServlet extends HttpServlet {
                     request.getSession().setAttribute(USER_SESSION_NAME, user);
                     response.sendRedirect(PORTAL_FACILITIES_JSP);
                 }
-            } else {
-                request.setAttribute(ERROR_MESSAGE, MSG2);
-                //TODO: increase count
-                request.getRequestDispatcher(LOGIN_JSP).forward(request, response);
             }
-        } else {
-            request.setAttribute(ERROR_MESSAGE, MSG1);
+        } catch (Exception e) {
+            request.setAttribute(ERROR_MESSAGE, e.getMessage());
             request.getRequestDispatcher(LOGIN_JSP).forward(request, response);
         }
     }

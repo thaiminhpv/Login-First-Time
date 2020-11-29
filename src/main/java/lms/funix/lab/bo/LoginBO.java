@@ -2,7 +2,6 @@ package lms.funix.lab.bo;
 
 import lms.funix.lab.dao.UserDAO;
 import lms.funix.lab.entities.User;
-import lms.funix.lab.view.View;
 
 import java.util.Map;
 import java.util.Objects;
@@ -17,14 +16,14 @@ public class LoginBO {
     private static final int PASSWORD_MAX_LENGTH = 8;
 
     /**
-     * Check syntax only
-     *
      * @param user
-     * @return True if passed
+     * @return nothing
+     * @throws Exception (ErrorMessage)
      */
-    public boolean validate(User user) {
-        return Pattern.matches(USERID_REGEX_MATCHER, user.getUserID())
-                && !user.getPassword().isEmpty() && user.getPassword().length() <= PASSWORD_MAX_LENGTH;
+    public void validate(User user) throws Exception {
+        if (Pattern.matches(USERID_REGEX_MATCHER, user.getUserID())
+                && !user.getPassword().isEmpty() && user.getPassword().length() <= PASSWORD_MAX_LENGTH)
+            throw new Exception(MSG1);
     }
 
     /**
@@ -34,7 +33,7 @@ public class LoginBO {
      * @param confirmPassword
      * @return error message
      */
-    public String checkPassword(User user, String oldPassword, String newPassword, String confirmPassword) {
+    public String checkChangePassword(User user, String oldPassword, String newPassword, String confirmPassword) {
         if (!Objects.equals(newPassword, confirmPassword)) {
             return MSG1;
         } else if (!Objects.equals(user.getPassword(), oldPassword)) {
@@ -48,7 +47,7 @@ public class LoginBO {
 
     }
 
-    public boolean login(User user) {
-        return UserDAO.validate(user);
+    public boolean login(User user) throws Exception {
+        return UserDAO.validateUser(user);
     }
 }

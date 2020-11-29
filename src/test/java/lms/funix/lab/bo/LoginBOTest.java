@@ -4,7 +4,17 @@ import lms.funix.lab.entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import static lms.funix.lab.view.View.LoginFirstTime.MSG1;
+import static lms.funix.lab.view.View.LoginFirstTime.MSG2;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoginBOTest {
@@ -20,6 +30,7 @@ class LoginBOTest {
     @Test
     void testValidate_allUsersCase_successful() {
         Object[][] testUsers = new Object[][]{
+                // userID / password / expected output / Message
                 {"123", "abc", true, "valid"},
                 {"123", "abc123", true, "valid"},
                 {"123", "123", true, "valid"},
@@ -32,7 +43,33 @@ class LoginBOTest {
 
         final LoginBO loginBO = new LoginBO();
         for (Object[] testUser : testUsers) {
-            assertEquals(testUser[2], loginBO.validate(new User((String) testUser[0], (String) testUser[1])), (String) testUser[3]);
+            try {
+                loginBO.validate(new User((String) testUser[0], (String) testUser[1]));
+                throw new Exception("Validate correct!");
+            } catch (Exception e) {
+                assertEquals(testUser[2], Objects.equals(e.getMessage(), MSG1), (String) testUser[3]);
+            }
+        }
+
+    }
+
+
+    @Test
+    void testCheckChangePassword() {
+        Object[][] testUsers = new Object[][]{
+                // {userID / old password / new password / confirm password } / actual old password / expected output / Message
+                {"123", "abcd123", "abc96", "abc96", "abcd123", null, "valid"},
+                {"345", "abcd123", "abc96", "abc70", "abcd123", MSG1, "new password and confirm password must match"},
+                {"6973", "mnpq", "abc69", "abc69", "mpnkasdf", MSG2, "old password must match"},
+        };
+
+        final LoginBO loginBO = new LoginBO();
+        for (Object[] testUser : testUsers) {
+            assertEquals(
+                    testUser[5],
+                    loginBO.checkChangePassword(new User((String) testUser[0], (String) testUser[4]), (String) testUser[1], (String) testUser[2], (String) testUser[3]),
+                    (String) testUser[6]
+            );
         }
     }
 
