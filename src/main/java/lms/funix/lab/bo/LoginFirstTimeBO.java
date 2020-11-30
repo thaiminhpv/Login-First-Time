@@ -1,6 +1,7 @@
 package lms.funix.lab.bo;
 
 import lms.funix.lab.dao.HintDAO;
+import lms.funix.lab.dao.UserDAO;
 import lms.funix.lab.entities.User;
 
 import java.util.Map;
@@ -35,6 +36,15 @@ public class LoginFirstTimeBO {
         }
     }
 
-    public void changePassword(User user, String newPassword) {
+    /**
+     * Change user's password and set first login to false if it's user's first login
+     * @param user
+     * @param newPassword
+     * @throws Exception if user not found in database
+     */
+    public void changePassword(User user, String newPassword) throws Exception {
+        user.setPassword(newPassword);
+        if (UserDAO.isFirstLogin(user)) user.setFirstLogin(false);
+        UserDAO.updateUser(user);
     }
 }

@@ -1,6 +1,8 @@
 <%@ page import="static lms.funix.lab.view.View.Login.Params.PASSWORD" %>
 <%@ page import="static lms.funix.lab.view.View.Login.Params.USER_ID" %>
-<%@ page import="static lms.funix.lab.view.View.LoginFirstTime.Params.ERROR_MESSAGE" %><%--
+<%@ page import="static lms.funix.lab.view.View.LoginFirstTime.Params.ERROR_MESSAGE" %>
+<%@ page import="lms.funix.lab.view.View" %>
+<%@ page import="static lms.funix.lab.view.View.Path.FORGOT_PASSWORD_JSP" %><%--
   Created by IntelliJ IDEA.
   User: Thaiminhpv PC
   Date: 21-Nov-20
@@ -28,8 +30,7 @@
         <input type="password" name="<%=PASSWORD%>">
     </label>
     <br><input type="submit"><br>
-    <a href="first_time_login">Forgot password</a>
-    <!-- TODO: change this later to forgot_password_jsp -->
+    <a href="<%=FORGOT_PASSWORD_JSP%>">Forgot password</a>
 </form>
 <%@include file="components/footer.jsp" %>
 </body>

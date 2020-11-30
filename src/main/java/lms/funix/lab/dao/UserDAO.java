@@ -3,6 +3,7 @@ package lms.funix.lab.dao;
 import lms.funix.lab.entities.User;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -66,10 +67,7 @@ public class UserDAO {
      * @throws Exception - errorMessage if user found but wrong password -> increase failed attempts
      */
     public static boolean validateUser(User user) throws Exception {
-        final File file = new File(getFilePath(USER_FILE));
-        System.out.println(file.getAbsolutePath());
-
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(getFilePath(USER_FILE)), StandardCharsets.UTF_8))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 final String[] attributes = line.split(SEPARATOR);
@@ -91,6 +89,22 @@ public class UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+
+    /**
+     * @param checkingUser
+     * @return true if it is the first time user login, otherwise false
+     * @throws Exception if user is not found
+     */
+    public static boolean isFirstLogin(User checkingUser) throws Exception {
+        return getAllUsers()
+                .stream()
+                .filter(user -> user.getUserID()
+                        .equals(checkingUser.getUserID()))
+                .findAny()
+                .orElseThrow(Exception::new)
+                .isFirstLogin();
     }
 
     /**

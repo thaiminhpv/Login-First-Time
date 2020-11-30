@@ -3,10 +3,13 @@ package lms.funix.lab.dao;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
 import static lms.funix.lab.commons.HelperDAO.getFilePath;
+import static lms.funix.lab.view.View.Path.DAO.FILE_PATH.HINTS_ANSWER_FILE;
 import static lms.funix.lab.view.View.Path.DAO.FILE_PATH.USER_FILE;
 import static lms.funix.lab.view.View.Path.DAO.SEPARATOR;
 
@@ -15,7 +18,7 @@ public class HintDAO {
      * append hints to the end of database
      */
     public static synchronized void addHints(String userID, Map<String, String> hintsList) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(getFilePath(USER_FILE), true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(getFilePath(HINTS_ANSWER_FILE), StandardCharsets.UTF_8, true))) {
             hintsList.forEach((key, value) -> writer.println(hintsToStringDAO(userID, key, value)));
         } catch (IOException e) {
             e.printStackTrace();

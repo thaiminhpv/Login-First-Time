@@ -26,6 +26,11 @@ public class View {
         public static final String MSG1 = "new Password and new confirm password must be identical!";
         public static final String MSG2 = "old password doesn't match!";
         public static final String MSG3 = "You must answer at least one (1) of the hint question below";
+        public static final String MSG4 = "Password changed successfully! Please login again";
+
+        public class Config {
+            public static final int NULL_HINT_QUESTION = -1;
+        }
 
         public class Params {
             public static final String PARAMS_ANSWERS = "answers";

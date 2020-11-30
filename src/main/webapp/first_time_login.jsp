@@ -1,5 +1,6 @@
 <%@ page import="static lms.funix.lab.view.View.LIST_HINT_QUESTIONS" %>
-<%@ page import="static lms.funix.lab.view.View.LoginFirstTime.Params.*" %><%--
+<%@ page import="static lms.funix.lab.view.View.LoginFirstTime.Params.*" %>
+<%@ page import="static lms.funix.lab.view.View.LoginFirstTime.Config.NULL_HINT_QUESTION" %><%--
   Created by IntelliJ IDEA.
   User: Thaiminhpv PC
   Date: 21-Nov-20
@@ -19,7 +20,7 @@
     <% for (int i = 0; i < 3; i++) {%>
         <label>
             <select name="<%=PARAMS_QUESTIONS%>">
-                <option>Select Hint Question</option>
+                <option value="<%=NULL_HINT_QUESTION%>">Select Hint Question</option>
                 <% for (int j = 0; j < LIST_HINT_QUESTIONS.length; j++) {%>
                     <option value="<%=j%>"><%=LIST_HINT_QUESTIONS[j]%></option>
                 <% }%>

@@ -47,6 +47,10 @@ public class User {
         return Objects.hash(userID, password);
     }
 
+    /**
+     * this is just getter, not use this to check user's first login status, use @{isFirstLogin} in {@link lms.funix.lab.dao.UserDAO} instead
+     * @return
+     */
     public boolean isFirstLogin() {
         return firstLogin;
     }
