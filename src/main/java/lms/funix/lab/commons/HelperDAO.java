@@ -3,7 +3,7 @@ package lms.funix.lab.commons;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import static lms.funix.lab.view.View.Path.DAO.setResourcePath;
+import static lms.funix.lab.view.View.Path.DAO.*;
 
 public class HelperDAO implements ServletContextListener {
     @Override
@@ -15,5 +15,9 @@ public class HelperDAO implements ServletContextListener {
     public void contextInitialized(ServletContextEvent arg0) {
         //do stuff before web application is started
         setResourcePath(arg0.getServletContext().getRealPath("/"));
+    }
+
+    public static String getFilePath(String file) {
+        return RESOURCE_PATH + DATABASE_LOCATION + file;
     }
 }

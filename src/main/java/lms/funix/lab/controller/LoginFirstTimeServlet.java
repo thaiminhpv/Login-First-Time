@@ -1,6 +1,6 @@
 package lms.funix.lab.controller;
 
-import lms.funix.lab.bo.LoginBO;
+import lms.funix.lab.bo.LoginFirstTimeBO;
 import lms.funix.lab.entities.User;
 
 import javax.servlet.ServletException;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import static lms.funix.lab.view.View.LIST_HINT_QUESTIONS;
@@ -32,14 +33,27 @@ public class LoginFirstTimeServlet extends HttpServlet {
         final User currentUser = (User) request.getSession().getAttribute(USER_SESSION_NAME);
 
         if (currentUser == null) {
+            //user not logged in
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        final String errorMessage = new LoginBO().checkChangePassword(currentUser, oldPassword, newPassword, confirmPassword);
+        final HashMap<String, String> hintsMap = new HashMap<>();
+        for (int i = 0; i < answers.length; i++) {
+            hintsMap.put(questions[i], answers[i]);
+        }
+        System.out.println(hintsMap);
 
-        request.setAttribute(ERROR_MESSAGE, errorMessage);
-        request.getRequestDispatcher(FIRST_TIME_LOGIN_SERVLET).forward(request, response);
+        final LoginFirstTimeBO bo = new LoginFirstTimeBO();
+
+        try {
+            bo.addHints(currentUser, hintsMap);
+            bo.checkChangePassword(currentUser, oldPassword, newPassword, confirmPassword);
+            bo.changePassword(currentUser, newPassword);
+        } catch (Exception e) {
+            request.setAttribute(ERROR_MESSAGE, e);
+            request.getRequestDispatcher(FIRST_TIME_LOGIN_SERVLET).forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

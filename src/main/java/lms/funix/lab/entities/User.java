@@ -1,6 +1,5 @@
 package lms.funix.lab.entities;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class User {
@@ -8,7 +7,6 @@ public class User {
     private String password;
     private boolean firstLogin = true;
     private int failedAttempts = 0;
-    private Map<String, String> hintAnswers;
 
     public User(String userID, String password) {
         this.userID = userID;
@@ -47,14 +45,6 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(userID, password);
-    }
-
-    public Map<String, String> getHintAnswers() {
-        return hintAnswers;
-    }
-
-    public void setHintAnswers(Map<String, String> hintAnswers) {
-        this.hintAnswers = hintAnswers;
     }
 
     public boolean isFirstLogin() {

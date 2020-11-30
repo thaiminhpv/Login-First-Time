@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static lms.funix.lab.commons.HelperDAO.getFilePath;
 import static lms.funix.lab.view.View.Login.*;
 import static lms.funix.lab.view.View.Login.Config.MAX_ATTEMPTS;
 import static lms.funix.lab.view.View.Path.DAO.*;
@@ -81,7 +82,6 @@ public class UserDAO {
                         return true;
                     } else {
                         currentUser.increaseFailedAttempts();
-                        //TODO: update User to database
                         updateUser(currentUser);
                         throw new Exception(MSG2 + (MAX_ATTEMPTS - currentUser.getFailedAttempts()));
                     }
@@ -121,10 +121,6 @@ public class UserDAO {
         args.add(user.isFirstLogin() ? TRUE_STRING : FALSE_STRING);
         args.add(String.valueOf(user.getFailedAttempts()));
         return String.join(SEPARATOR, args);
-    }
-
-    private static String getFilePath(String file) {
-        return RESOURCE_PATH + DATABASE_LOCATION + file;
     }
 
 }

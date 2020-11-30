@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 import static lms.funix.lab.view.View.Login.MSG1;
 import static lms.funix.lab.view.View.Login.MSG2;
@@ -46,7 +44,7 @@ class LoginBOTest {
         for (Object[] testUser : testUsers) {
             try {
                 loginBO.validate(new User((String) testUser[0], (String) testUser[1]));
-                throw new Exception("Validate correct!");
+                throw new Exception();
             } catch (Exception e) {
                 tests.add(() -> assertEquals(testUser[2], !Objects.equals(e.getMessage(), MSG1), (String) testUser[3]));
             }
@@ -65,12 +63,14 @@ class LoginBOTest {
         };
 
         List<Executable> tests = new ArrayList<>();
-        final LoginBO loginBO = new LoginBO();
+        final LoginFirstTimeBO loginFirstTimeBO = new LoginFirstTimeBO();
         for (Object[] testUser : testUsers) {
-            tests.add(() -> assertEquals(
-                    testUser[5],
-                    loginBO.checkChangePassword(new User((String) testUser[0], (String) testUser[4]), (String) testUser[1], (String) testUser[2], (String) testUser[3]),
-                    (String) testUser[6]));
+            try {
+                loginFirstTimeBO.checkChangePassword(new User((String) testUser[0], (String) testUser[4]), (String) testUser[1], (String) testUser[2], (String) testUser[3]);
+                throw new Exception();
+            } catch (Exception e) {
+                tests.add(() -> assertEquals(testUser[5], e.getMessage(), (String) testUser[6]));
+            }
         }
         assertAll(tests);
     }
@@ -78,4 +78,5 @@ class LoginBOTest {
     @Test
     void login() {
     }
+
 }
