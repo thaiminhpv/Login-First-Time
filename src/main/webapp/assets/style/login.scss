@@ -1,31 +1,16 @@
 body {
-  header {
-    .search {
-      background: #005cbf;
+  main {
+    .img-container {
+      max-height: 200px;
+      overflow: hidden;
     }
-    .date {
-      background: #cadbfc;
-      span {
-        display: inline-block;
-      }
-      a {
-        display: inline-block;
-      }
+
+    p {
+      font-size: 12px;
     }
-  }
-  footer {
-    height: 100px;
-    > div:first-child {
-      height: 50px;
-    }
-    span, li, a {
-      display: inline-block;
-    }
-    a {
-      padding: 5px 20px;
-    }
-    > div.clearfix {
-      height: 10px;
+
+    .note {
+      margin: 30px auto;
     }
   }
 }

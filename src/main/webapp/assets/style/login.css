@@ -1,29 +1,12 @@
-body header .search {
-  background: #005cbf;
+body main .img-container {
+  max-height: 200px;
+  overflow: hidden;
 }
-body header .date {
-  background: #cadbfc;
+body main p {
+  font-size: 12px;
 }
-body header .date span {
-  display: inline-block;
-}
-body header .date a {
-  display: inline-block;
-}
-body footer {
-  height: 100px;
-}
-body footer > div:first-child {
-  height: 50px;
-}
-body footer span, body footer li, body footer a {
-  display: inline-block;
-}
-body footer a {
-  padding: 5px 20px;
-}
-body footer > div.clearfix {
-  height: 10px;
+body main .note {
+  margin: 30px auto;
 }
 
 /*# sourceMappingURL=login.css.map */

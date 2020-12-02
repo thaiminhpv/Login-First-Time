@@ -9,10 +9,12 @@
 <html>
 <head>
     <title>Login</title>
+    <%@include file="components/lib.html"%>
 </head>
-<body>
-<%@include file="components/header.jsp" %>
+<body class="container-fluid">
+<%@include file="components/header.html" %>
 <h1>This is forgot password screen!</h1>
-<%@include file="components/footer.jsp" %>
+<%@include file="components/footer.html" %>
+<%@include file="components/script_lib.html"%>
 </body>
 </html>

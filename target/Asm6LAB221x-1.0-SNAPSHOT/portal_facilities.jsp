@@ -9,11 +9,13 @@
 <html>
 <head>
     <title>Login</title>
+    <%@include file="components/lib.html"%>
 </head>
-<body>
-<%@include file="components/header.jsp" %>
+<body class="container-fluid">
+<%@include file="components/header.html" %>
 <h1>Logged in successfully!</h1>
 <h2>You're now able to access the portal facilities and services</h2>
-<%@include file="components/footer.jsp" %>
+<%@include file="components/footer.html" %>
+<%@include file="components/script_lib.html"%>
 </body>
 </html>

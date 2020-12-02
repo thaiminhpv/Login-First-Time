@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="../vendors/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/style/style_header_footer.css">
     <link rel="stylesheet" href="../assets/style/login.css">
 </head>
 <body class="container-fluid">
+
 <header>
     <div class="navbar navbar-expand bg-primary text-light"><h1 class="m-3 ml-5">Royal Malaysian Customs</h1></div>
-
-    <div class="navbar navbar-expand bg-info text-light p-0 m-0 shadow-sm">
+    <div class="navbar navbar-expand morpheus-den-gradient text-light p-0 m-0 shadow-sm">
         <div class="navbar-collapse collapse p-3">
             <a class="navbar-brand text-light">Bahasa Melayu</a>
             <ul class="navbar-nav">
@@ -41,20 +42,62 @@
 </header>
 
 <main>
-    <h1>Login to MyGSeT Portal</h1>
+    <h1 class="m-4">Login to MyGSeT Portal</h1>
     <hr>
-    <div>
-        <div></div>
-        <div></div>
-        <div>
-            <h2>MEMBER LOGIN</h2>
-            <input type="text"><input type="text">
-            <form action="" method="post"></form>
+    <div class="w-100 row">
+        <div class="col-lg-8 col-11 mx-auto my-2">
+            <div class="border p-1">
+            <div class="row img-container"><img class="col-12" src="../assets/images/alison_courseware_intro_1492.jpg"
+                                                alt="banner"></div>
+            <div class="row">
+                <div class="col-6 text-center m-auto">
+                    <p>Enter your Single Sign-On User ID and password to login</p>
+                    <p>Authentication failed. Please try again</p>
+                    <p>If you have forgotten your password.
+                        <a href="#">Click here.</a>
+                        <!--TODO: insert forgot link here-->
+                    </p>
+
+                </div>
+                <div class="col-6 justify-content-center bg-light">
+                    <h2 class="m-2 text-info">MEMBER LOGIN</h2>
+                    <form action="#" method="post"> <!-- TODO: insert link action here -->
+                        <div class="w-100">
+                            <div class="row">
+                                <p class="col-3 font-weight-bold text-right"><label for="username">User ID</label></p>
+                                <div class="col-9 pr-5">
+                                    <input class="w-100" type="text" name="username" value="" id="username">
+                                    <p class="text-danger mb-0">(max 16 characters)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100">
+                            <div class="row">
+                                <p class="col-3 font-weight-bold text-right"><label for="password">Password</label></p>
+                                <div class="col-9 pr-5">
+                                    <input class="w-100" type="password" name="password" value="" id="password">
+                                    <p class="text-danger">(max 8 characters)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 row">
+                            <div class="col-4"></div>
+                            <div>
+                                <input class="mr-3 bg-primary text-warning" type="submit">
+                                <input class="bg-primary text-warning" type="button" value="Clear" onClick="clearInput()">
+                                <div><a href="#">Forgot Password</a></div> <!-- TODO -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            <p class="note text-center">Unauthorized use of this site is prohibited and may subject you to civil and criminal prosecution</p>
         </div>
     </div>
 </main>
 
-<footer class="bg-primary text-light p-1">
+<footer class="text-light p-1">
     <div class="w-100">
         <ul class="float-left p-2">
             <li><a class="text-light border-right" href="#">About This Site</a></li>
@@ -67,6 +110,14 @@
     <div class="clearfix"></div>
     <span class="float-right pr-3">Copyright © 2007 Portal Kastarn Diraja Malaysia</span>
 </footer>
+
+<script src="../vendors/js/jquery.min.js">
+</script>
+<script>
+    function clearInput() {
+        $('#username,#password').val('');
+    }
+</script>
 
 </body>
 </html>

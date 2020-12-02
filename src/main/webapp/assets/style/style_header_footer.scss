@@ -1,0 +1,46 @@
+body {
+  min-width: 1100px;
+
+  header {
+    .search {
+      background: #005cbf;
+    }
+
+    .date {
+      background: #cadbfc;
+
+      span {
+        display: inline-block;
+      }
+
+      a {
+        display: inline-block;
+      }
+    }
+
+    .morpheus-den-gradient {
+      background: linear-gradient(to bottom, #99ccff 0%, #3366ff 100%);
+    }
+  }
+
+  footer {
+    height: 100px;
+    background: #005cbf;;
+
+    > div:first-child {
+      height: 50px;
+    }
+
+    span, li, a {
+      display: inline-block;
+    }
+
+    a {
+      padding: 5px 20px;
+    }
+
+    > div.clearfix {
+      height: 10px;
+    }
+  }
+}

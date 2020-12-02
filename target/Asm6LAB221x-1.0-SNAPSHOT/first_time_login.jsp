@@ -11,10 +11,11 @@
 <html>
 <head>
     <title>First Time Login</title>
+    <%@include file="components/lib.html"%>
 </head>
-<body>
+<body class="container-fluid">
 
-<%@include file="components/header.jsp" %>
+<%@include file="components/header.html" %>
 <h1>Error: <%=request.getAttribute(ERROR_MESSAGE) == null ? "Nothing" : request.getAttribute(ERROR_MESSAGE)%></h1>
 <form action="${pageContext.request.contextPath}/first_time_login" method="post">
     <% for (int i = 0; i < 3; i++) {%>
@@ -34,8 +35,8 @@
     <input type="submit">
 </form>
 
-<script src="vendors/js/jquery.min.js"></script>
-<%@include file="components/footer.jsp" %>
+<%@include file="components/footer.html" %>
+<%@include file="components/script_lib.html"%>
 
 </body>
 </html>

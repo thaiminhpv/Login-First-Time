@@ -1,0 +1,36 @@
+body {
+  min-width: 1100px;
+}
+body header .search {
+  background: #005cbf;
+}
+body header .date {
+  background: #cadbfc;
+}
+body header .date span {
+  display: inline-block;
+}
+body header .date a {
+  display: inline-block;
+}
+body header .morpheus-den-gradient {
+  background: linear-gradient(to bottom, #99ccff 0%, #3366ff 100%);
+}
+body footer {
+  height: 100px;
+  background: #005cbf;
+}
+body footer > div:first-child {
+  height: 50px;
+}
+body footer span, body footer li, body footer a {
+  display: inline-block;
+}
+body footer a {
+  padding: 5px 20px;
+}
+body footer > div.clearfix {
+  height: 10px;
+}
+
+/*# sourceMappingURL=style_header_footer.css.map */
