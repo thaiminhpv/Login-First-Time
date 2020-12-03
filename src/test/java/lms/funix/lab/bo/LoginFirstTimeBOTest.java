@@ -1,8 +1,6 @@
 package lms.funix.lab.bo;
 
 import lms.funix.lab.entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -11,22 +9,10 @@ import java.util.List;
 
 import static lms.funix.lab.view.View.LoginFirstTime.MSG1;
 import static lms.funix.lab.view.View.LoginFirstTime.MSG2;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoginFirstTimeBOTest {
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void addHints() {
-    }
-
     @Test
     void testCheckChangePassword() {
         Object[][] testUsers = new Object[][]{
@@ -48,9 +34,5 @@ class LoginFirstTimeBOTest {
         }
         assertAll(tests);
     }
-
-
-    @Test
-    void changePassword() {
-    }
 }
+

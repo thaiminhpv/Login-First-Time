@@ -19,8 +19,9 @@ public class LoginBO {
     public void validate(User user) throws Exception {
         if (!Pattern.matches(USERID_REGEX_MATCHER, user.getUserID())
                 || user.getPassword().isEmpty()
-                || user.getPassword().length() > PASSWORD_MAX_LENGTH)
+                || user.getPassword().length() > PASSWORD_MAX_LENGTH) {
             throw new Exception(MSG1);
+        }
     }
 
     public boolean login(User user) throws Exception {

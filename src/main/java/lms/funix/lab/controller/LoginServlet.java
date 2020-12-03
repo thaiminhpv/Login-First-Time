@@ -20,12 +20,11 @@ import static lms.funix.lab.view.View.USER_SESSION_NAME;
 public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final String user_id = request.getParameter(USER_ID);
+        final String userId = request.getParameter(USER_ID);
         final String password = request.getParameter(PASSWORD);
-        final User user = new User(user_id, password);
+        final User user = new User(userId , password);
 
         final LoginBO loginBO = new LoginBO();
-
         try {
             loginBO.validate(user); //check syntax
             if (loginBO.login(user)) { //check if exists in database

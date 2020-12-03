@@ -26,6 +26,15 @@ import static lms.funix.lab.view.View.USER_SESSION_NAME;
 public class LoginFirstTimeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
+        // if user not logged in, then redirect them to login page
+        final User currentUser = (User) request.getSession().getAttribute(USER_SESSION_NAME);
+        if (currentUser == null) {
+            response.sendRedirect(LOGIN_JSP);
+            return;
+        }
+
+        // get parameters from user
         final Map<String, String[]> parameterMap = request.getParameterMap();
 
         final String oldPassword = parameterMap.get(PARAMS_OLD_PASSWORD)[0];
@@ -39,19 +48,12 @@ public class LoginFirstTimeServlet extends HttpServlet {
                 .filter(s -> !s.isEmpty())
                 .toArray(String[]::new);
 
-        final User currentUser = (User) request.getSession().getAttribute(USER_SESSION_NAME);
-
-        if (currentUser == null) {
-            //user not logged in
-            response.sendRedirect(LOGIN_JSP);
-            return;
-        }
-
         final LoginFirstTimeBO bo = new LoginFirstTimeBO();
-
         try {
             final HashMap<String, String> hintsMap = new HashMap<>();
-            for (int i = 0; i < answers.length; i++) hintsMap.put(questions[i], answers[i]);
+            for (int i = 0; i < answers.length; i++) {
+                hintsMap.put(questions[i], answers[i]);
+            }
             bo.addHints(currentUser, hintsMap);
             bo.checkChangePassword(currentUser, oldPassword, newPassword, confirmPassword);
             bo.changePassword(currentUser, newPassword);

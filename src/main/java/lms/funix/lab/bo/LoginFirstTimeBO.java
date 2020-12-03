@@ -17,7 +17,9 @@ public class LoginFirstTimeBO {
      * @throws Exception - error message
      */
     public void addHints(User user, Map<String, String> hints) throws Exception {
-        if (hints.isEmpty()) throw new Exception(MSG4);
+        if (hints.isEmpty()) {
+            throw new Exception(MSG4);
+        }
         HintDAO.addHints(user.getUserID(), hints);
     }
 
@@ -46,7 +48,9 @@ public class LoginFirstTimeBO {
      */
     public void changePassword(User user, String newPassword) throws Exception {
         user.setPassword(newPassword);
-        if (UserDAO.isFirstLogin(user)) user.setFirstLogin(false);
+        if (UserDAO.isFirstLogin(user)) {
+            user.setFirstLogin(false);
+        }
         UserDAO.updateUser(user);
     }
 }

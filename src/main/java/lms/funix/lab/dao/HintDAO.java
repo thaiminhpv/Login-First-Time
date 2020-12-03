@@ -3,14 +3,12 @@ package lms.funix.lab.dao;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
 import static lms.funix.lab.commons.HelperDAO.getFilePath;
-import static lms.funix.lab.view.View.Path.DAO.FILE_PATH.HINTS_ANSWER_FILE;
-import static lms.funix.lab.view.View.Path.DAO.FILE_PATH.USER_FILE;
+import static lms.funix.lab.view.View.Path.DAO.FilePath.HINTS_ANSWER_FILE;
 import static lms.funix.lab.view.View.Path.DAO.SEPARATOR;
 
 public class HintDAO {

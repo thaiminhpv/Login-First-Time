@@ -1,7 +1,5 @@
 package lms.funix.lab.entities;
 
-import java.util.Objects;
-
 public class User {
     private String userID;
     private String password;
@@ -40,11 +38,6 @@ public class User {
 
     public void increaseFailedAttempts() {
         this.failedAttempts++;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userID, password);
     }
 
     /**

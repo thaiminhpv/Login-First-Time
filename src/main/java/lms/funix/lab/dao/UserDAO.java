@@ -11,7 +11,10 @@ import static lms.funix.lab.commons.HelperDAO.getFilePath;
 import static lms.funix.lab.view.View.Login.*;
 import static lms.funix.lab.view.View.Login.Config.MAX_ATTEMPTS;
 import static lms.funix.lab.view.View.Path.DAO.*;
-import static lms.funix.lab.view.View.Path.DAO.FILE_PATH.USER_FILE;
+import static lms.funix.lab.view.View.Path.DAO.Convention.FALSE_STRING;
+import static lms.funix.lab.view.View.Path.DAO.Convention.TRUE_STRING;
+import static lms.funix.lab.view.View.Path.DAO.Convention.User.*;
+import static lms.funix.lab.view.View.Path.DAO.FilePath.USER_FILE;
 
 public class UserDAO {
     /**
@@ -51,7 +54,7 @@ public class UserDAO {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 final String[] attributes = line.split(SEPARATOR);
-                final User currentUser = new User(attributes[0], attributes[1], Integer.parseInt(attributes[2]) == 1, Integer.parseInt(attributes[3]));
+                final User currentUser = new User(attributes[USER_ID_INDEX], attributes[PASSWORD_INDEX], Objects.equals(attributes[IS_FIRST_LOGIN_INDEX], TRUE_STRING), Integer.parseInt(attributes[FAIL_COUNT_INDEX]));
                 out.add(currentUser);
             }
         } catch (IOException e) {
@@ -71,7 +74,7 @@ public class UserDAO {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 final String[] attributes = line.split(SEPARATOR);
-                final User currentUser = new User(attributes[0], attributes[1], Integer.parseInt(attributes[2]) == 1, Integer.parseInt(attributes[3]));
+                final User currentUser = new User(attributes[USER_ID_INDEX], attributes[PASSWORD_INDEX], Objects.equals(attributes[IS_FIRST_LOGIN_INDEX], TRUE_STRING), Integer.parseInt(attributes[FAIL_COUNT_INDEX]));
                 if (Objects.equals(user.getUserID(), currentUser.getUserID())) {
                     // if userID matches
                     if (currentUser.getFailedAttempts() >= MAX_ATTEMPTS) {

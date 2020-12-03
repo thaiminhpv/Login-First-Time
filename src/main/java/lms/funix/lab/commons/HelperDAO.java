@@ -18,6 +18,6 @@ public class HelperDAO implements ServletContextListener {
     }
 
     public static String getFilePath(String file) {
-        return RESOURCE_PATH + DATABASE_LOCATION + file;
+        return getResourcePath() + DATABASE_LOCATION + file;
     }
 }

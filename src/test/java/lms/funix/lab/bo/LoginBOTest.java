@@ -1,8 +1,6 @@
 package lms.funix.lab.bo;
 
 import lms.funix.lab.entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -11,20 +9,10 @@ import java.util.List;
 import java.util.Objects;
 
 import static lms.funix.lab.view.View.Login.MSG1;
-import static lms.funix.lab.view.View.Login.MSG2;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoginBOTest {
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void testValidate_allUsersCase_successful() {
         Object[][] testUsers = new Object[][]{
@@ -51,10 +39,4 @@ class LoginBOTest {
         }
         assertAll(tests);
     }
-
-
-    @Test
-    void login() {
-    }
-
 }
