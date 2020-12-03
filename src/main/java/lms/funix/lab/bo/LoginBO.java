@@ -26,6 +26,7 @@ public class LoginBO {
     }
 
     /**
+     * also update user's first login status
      * @param user
      * @return true if correct, false if user doesn't exist in database
      * @throws Exception - errorMessage if user found but if also wrong password -> also increase failed attempts
@@ -37,6 +38,9 @@ public class LoginBO {
                 if (validatingUser.getFailedAttempts() >= MAX_ATTEMPTS) {
                     throw new Exception(MSG3);
                 } else if (Objects.equals(user.getPassword(), validatingUser.getPassword())) {
+                    if (!UserDAO.isFirstLogin(user)) {
+                        user.setFirstLogin(false);
+                    }
                     return true;
                 } else {
                     validatingUser.increaseFailedAttempts();
@@ -47,4 +51,5 @@ public class LoginBO {
             return false;
         });
     }
+
 }

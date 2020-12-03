@@ -63,7 +63,7 @@
                                 <div>
                                     <input class="mr-3 bg-primary text-warning" type="submit">
                                     <input class="bg-primary text-warning" type="button" value="Clear" onClick="clearInput()">
-                                    <div><a href="<%=FORGOT_PASSWORD_JSP%>">Forgot Password</a></div> <!-- TODO -->
+                                    <div><a href="<%=FORGOT_PASSWORD_JSP%>">Forgot Password</a></div>
                                 </div>
                             </div>
                         </form>
