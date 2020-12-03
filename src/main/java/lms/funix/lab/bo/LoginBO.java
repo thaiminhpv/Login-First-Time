@@ -11,6 +11,7 @@ import static lms.funix.lab.view.View.Login.*;
 
 
 public class LoginBO {
+
     /**
      * @param user
      * @return nothing
