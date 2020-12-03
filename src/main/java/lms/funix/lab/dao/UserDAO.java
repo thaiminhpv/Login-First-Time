@@ -1,5 +1,6 @@
 package lms.funix.lab.dao;
 
+import lms.funix.lab.commons.HelperUserCallback;
 import lms.funix.lab.entities.User;
 
 import java.io.*;
@@ -8,17 +9,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static lms.funix.lab.commons.HelperDAO.getFilePath;
-import static lms.funix.lab.view.View.Login.*;
-import static lms.funix.lab.view.View.Login.Config.MAX_ATTEMPTS;
-import static lms.funix.lab.view.View.Path.DAO.*;
 import static lms.funix.lab.view.View.Path.DAO.Convention.FALSE_STRING;
 import static lms.funix.lab.view.View.Path.DAO.Convention.TRUE_STRING;
 import static lms.funix.lab.view.View.Path.DAO.Convention.User.*;
 import static lms.funix.lab.view.View.Path.DAO.FilePath.USER_FILE;
+import static lms.funix.lab.view.View.Path.DAO.SEPARATOR;
 
 public class UserDAO {
     /**
      * query all user into arraylist, delete the whole file, update new user, then print all back
+     *
      * @param updatingUser
      */
     public static synchronized void updateUser(User updatingUser) {
@@ -34,6 +34,7 @@ public class UserDAO {
 
     /**
      * append user to the end of database
+     *
      * @param user
      */
     public static synchronized void addUser(User user) {
@@ -46,6 +47,7 @@ public class UserDAO {
 
     /**
      * get all current users from database
+     *
      * @return list of existing users
      */
     public static ArrayList<User> getAllUsers() {
@@ -64,28 +66,17 @@ public class UserDAO {
     }
 
     /**
-     *
-     * @param user
-     * @return true if correct, false if user doesn't exist in database
-     * @throws Exception - errorMessage if user found but wrong password -> increase failed attempts
+     * @param callback for each user in database
+     * @return boolean
      */
-    public static boolean validateUser(User user) throws Exception {
+    public static boolean validateUser(HelperUserCallback callback) throws Exception {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(getFilePath(USER_FILE)), StandardCharsets.UTF_8))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 final String[] attributes = line.split(SEPARATOR);
                 final User currentUser = new User(attributes[USER_ID_INDEX], attributes[PASSWORD_INDEX], Objects.equals(attributes[IS_FIRST_LOGIN_INDEX], TRUE_STRING), Integer.parseInt(attributes[FAIL_COUNT_INDEX]));
-                if (Objects.equals(user.getUserID(), currentUser.getUserID())) {
-                    // if userID matches
-                    if (currentUser.getFailedAttempts() >= MAX_ATTEMPTS) {
-                        throw new Exception(MSG3);
-                    } else if (Objects.equals(user.getPassword(), currentUser.getPassword())) {
-                        return true;
-                    } else {
-                        currentUser.increaseFailedAttempts();
-                        updateUser(currentUser);
-                        throw new Exception(MSG2 + (MAX_ATTEMPTS - currentUser.getFailedAttempts()));
-                    }
+                if (callback.callbackWithUser(currentUser)) {
+                    return true;
                 }
             }
         } catch (IOException e) {
@@ -112,7 +103,8 @@ public class UserDAO {
 
     /**
      * update User to List
-     * @param list will be updated by reference
+     *
+     * @param list         will be updated by reference
      * @param updatingUser
      */
     private static void updateUserInList(ArrayList<User> list, User updatingUser) {
@@ -128,6 +120,7 @@ public class UserDAO {
     /**
      * convert User to be stored-readable in text file
      * split by SEPARATOR
+     *
      * @param user
      * @return String can be inserted into database
      */
