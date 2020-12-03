@@ -48,7 +48,7 @@ public class User {
     }
 
     /**
-     * this is just getter, not use this to check user's first login status, use @{isFirstLogin} in {@link lms.funix.lab.dao.UserDAO} instead
+     * this is just getter, not use this to check user's first login status, use in {@link lms.funix.lab.dao.UserDAO#isFirstLogin(User)} instead
      * @return
      */
     public boolean isFirstLogin() {
