@@ -17,7 +17,7 @@ public class LoginFirstTimeBO {
      * @throws Exception - error message
      */
     public void addHints(User user, Map<String, String> hints) throws Exception {
-        if (hints.isEmpty()) throw new Exception(MSG3);
+        if (hints.isEmpty()) throw new Exception(MSG4);
         HintDAO.addHints(user.getUserID(), hints);
     }
 
@@ -33,6 +33,8 @@ public class LoginFirstTimeBO {
             throw new Exception(MSG1);
         } else if (!Objects.equals(user.getPassword(), oldPassword)) {
             throw new Exception(MSG2);
+        } else if(Objects.equals(newPassword, oldPassword)) {
+            throw new Exception(MSG3);
         }
     }
 

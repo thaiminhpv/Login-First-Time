@@ -16,7 +16,7 @@ import java.util.Map;
 
 import static lms.funix.lab.view.View.LIST_HINT_QUESTIONS;
 import static lms.funix.lab.view.View.LoginFirstTime.Config.NULL_HINT_QUESTION;
-import static lms.funix.lab.view.View.LoginFirstTime.MSG4;
+import static lms.funix.lab.view.View.LoginFirstTime.MSG5;
 import static lms.funix.lab.view.View.LoginFirstTime.Params.*;
 import static lms.funix.lab.view.View.Path.FIRST_TIME_LOGIN_JSP;
 import static lms.funix.lab.view.View.Path.LOGIN_JSP;
@@ -56,7 +56,7 @@ public class LoginFirstTimeServlet extends HttpServlet {
             bo.checkChangePassword(currentUser, oldPassword, newPassword, confirmPassword);
             bo.changePassword(currentUser, newPassword);
             //successfully change password -> navigate user back to login screen
-            request.setAttribute(ERROR_MESSAGE, MSG4);
+            request.setAttribute(ERROR_MESSAGE, MSG5);
             request.getRequestDispatcher(LOGIN_JSP).forward(request, response);
         } catch (Exception e) {
             request.setAttribute(ERROR_MESSAGE, e.getMessage());
